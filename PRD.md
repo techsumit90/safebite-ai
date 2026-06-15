@@ -1,0 +1,14 @@
+- Initialize Next.js client application inside the `client/` directory using TypeScript, App Router, ESLint, Tailwind CSS v4, and src directory structure.
+- Configure Tailwind CSS v4 properly and verify successful frontend production build.
+- Initialize Node.js Express backend inside the `server/` directory.
+- Install backend dependencies including Express, Mongoose, CORS, dotenv, Helmet, and Morgan.
+- Install backend development dependencies including TypeScript, Nodemon, ts-node, and required type definitions.
+- Configure TypeScript setup and package scripts for development, build, and production execution.
+- Create scalable backend folder architecture including config, routes, controllers, middleware, models, and utils directories.
+- Configure MongoDB database connection using Mongoose and environment variables.
+- Create Express application setup with middleware configuration for CORS, JSON parsing, logging, and security headers.
+- Implement backend health check API endpoint at `GET /api/health`.
+- Configure environment variables for backend server and MongoDB connection.
+- Setup Nodemon for automatic backend server restart during development.
+- Verify successful MongoDB connection and backend server responsiveness.
+- Verify frontend and backend applications build and run successfully without errors.
