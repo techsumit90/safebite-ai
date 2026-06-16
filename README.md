@@ -1,22 +1,10 @@
-"# safebite-ai" 
-
-CodeRabbit Review Branch Test
-<div align="center">
-<img src="https://img.shields.io/badge/SafeBite-AI%20Food%20Analyzer-green?style=for-the-badge&logo=leaf" alt="SafeBite AI"/>
 # 🥗 SafeBite AI — Personalized Food Safety Analyzer
- 
+
 **An AI-powered web application that analyzes packaged food labels and provides personalized health safety assessments based on the user's medical conditions and dietary restrictions.**
- 
-[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat-square&logo=react)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-Auth%20%2B%20DB-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com/)
-[![Claude AI](https://img.shields.io/badge/Claude-AI%20Engine-FF6B35?style=flat-square)](https://anthropic.com/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
- 
-[Live Demo](#) • [Report a Bug](issues) • [Request Feature](issues) • [Documentation](#documentation)
- 
-</div>
+
+[Issues](https://github.com/techsumit90/safebite-ai/issues) • [Documentation](#documentation)
 ---
  
 ## 📌 Table of Contents
