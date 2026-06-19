@@ -1,22 +1,10 @@
-"# safebite-ai" 
-
-CodeRabbit Review Branch Test
-<div align="center">
-<img src="https://img.shields.io/badge/SafeBite-AI%20Food%20Analyzer-green?style=for-the-badge&logo=leaf" alt="SafeBite AI"/>
 # 🥗 SafeBite AI — Personalized Food Safety Analyzer
- 
+
 **An AI-powered web application that analyzes packaged food labels and provides personalized health safety assessments based on the user's medical conditions and dietary restrictions.**
- 
-[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=flat-square&logo=react)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-Auth%20%2B%20DB-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com/)
-[![Claude AI](https://img.shields.io/badge/Claude-AI%20Engine-FF6B35?style=flat-square)](https://anthropic.com/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
- 
-[Live Demo](#) • [Report a Bug](issues) • [Request Feature](issues) • [Documentation](#documentation)
- 
-</div>
+
+[Issues](https://github.com/techsumit90/safebite-ai/issues) • [Documentation](#documentation)
 ---
  
 ## 📌 Table of Contents
@@ -160,7 +148,7 @@ Fill in your credentials (see [Environment Variables](#environment-variables) se
 npm run dev
 ```
  
-Visit `http://localhost:5173` in your browser.
+Visit `http://localhost:5000` in your browser.
  
 ### 6. Build for Production
  
@@ -295,18 +283,7 @@ Users can configure one or more of the following conditions in their health prof
  
 ---
  
-## 📸 Screenshots
- 
-> _Screenshots will be added after UI stabilization. See the [live demo](#) for current UI._
- 
-| Page | Description |
-|---|---|
-| 🔐 Login / Register | Secure authentication with health onboarding |
-| 🏠 Dashboard | Quick scan shortcut + recent scan summary |
-| 👤 Health Profile | Condition checkboxes and allergy management |
-| 📷 Food Scanner | Drag-and-drop upload with OCR preview |
-| ✅ Analysis Result | Color-coded verdict, ingredient flags, warnings |
-| 🕓 Scan History | Searchable log of all past food scans |
+
  
 ---
  
@@ -316,30 +293,8 @@ Users can configure one or more of the following conditions in their health prof
  
 Analyzes extracted food label text against a user health profile.
  
-**Request Body:**
-```json
-{
-  "ocrText": "Ingredients: Sugar, Palm Oil, Wheat Flour...",
-  "nutritionFacts": "Sodium 780mg, Total Fat 12g...",
-  "healthConditions": ["diabetes", "high_blood_pressure"],
-  "allergies": ["peanuts", "gluten"]
-}
-```
- 
-**Response:**
-```json
-{
-  "verdict": "unsafe",
-  "overall_summary": "This product is not recommended for diabetic users due to high sugar content.",
-  "flagged_ingredients": [
-    { "name": "Sugar", "reason": "High glycemic index; raises blood glucose rapidly." },
-    { "name": "Palm Oil", "reason": "High in saturated fat; concern for cardiovascular health." }
-  ],
-  "nutritional_concerns": ["780mg sodium exceeds 30% of daily limit for hypertension patients."],
-  "health_risk_warnings": ["Not suitable for diabetics.", "May elevate blood pressure."],
-  "healthier_alternatives": ["Look for products with <5g sugar per serving and <200mg sodium."]
-}
-```
+
+
  
 ---
  
@@ -348,10 +303,10 @@ Analyzes extracted food label text against a user health profile.
 Contributions are welcome and appreciated. To contribute:
  
 1. Fork this repository
-2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Commit your changes: `git commit -m "feat: add your feature"`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Open a Pull Request against `main`
+2. Create a feature branch
+3. Commit your change
+4. Push to the branch
+5. Open a Pull Request against 
 Please follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages and ensure your code passes `npm run lint` before submitting.
  
 ---
