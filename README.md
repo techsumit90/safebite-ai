@@ -18,7 +18,6 @@
 - [Project Structure](#project-structure)
 - [AI Analysis Engine](#ai-analysis-engine)
 - [Supported Health Conditions](#supported-health-conditions)
-- [Screenshots](#screenshots)
 - [API Reference](#api-reference)
 - [Contributing](#contributing)
 - [License](#license)
