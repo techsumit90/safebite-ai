@@ -102,7 +102,7 @@ SafeBite AI is a full-stack web application designed to empower users with chron
 ```
  
 ---
- 
+
 ## 🚀 Getting Started
  
 ### Prerequisites

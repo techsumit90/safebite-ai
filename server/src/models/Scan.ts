@@ -44,4 +44,7 @@ const ScanSchema = new Schema<IScan>({
   scannedAt: { type: Date, default: Date.now },
 });
 
+// Add index on userId for efficient querying of scan history
+ScanSchema.index({ userId: 1 });
+
 export default mongoose.model<IScan>('Scan', ScanSchema);
