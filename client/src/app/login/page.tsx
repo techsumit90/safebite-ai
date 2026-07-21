@@ -259,6 +259,7 @@ export default function LoginPage() {
           </button>
         </form>
 
+        {/* Google OAuth temporarily hidden for MVP
         <div
           style={{
             margin: '24px 0',
@@ -299,6 +300,7 @@ export default function LoginPage() {
           </svg>
           Google OAuth
         </button>
+        */}
 
         <p style={{ marginTop: 24, textAlign: 'center', fontSize: 13, color: 'rgba(248, 250, 252, 0.5)' }}>
           Don't have an account?{' '}

@@ -18,7 +18,6 @@
 - [Project Structure](#project-structure)
 - [AI Analysis Engine](#ai-analysis-engine)
 - [Supported Health Conditions](#supported-health-conditions)
-- [Screenshots](#screenshots)
 - [API Reference](#api-reference)
 - [Contributing](#contributing)
 - [License](#license)
@@ -103,7 +102,7 @@ SafeBite AI is a full-stack web application designed to empower users with chron
 ```
  
 ---
- 
+
 ## 🚀 Getting Started
  
 ### Prerequisites
@@ -148,7 +147,7 @@ Fill in your credentials (see [Environment Variables](#environment-variables) se
 npm run dev
 ```
  
-Visit `http://localhost:5173` in your browser.
+Visit `http://localhost:5000` in your browser.
  
 ### 6. Build for Production
  
@@ -283,18 +282,7 @@ Users can configure one or more of the following conditions in their health prof
  
 ---
  
-## 📸 Screenshots
- 
-> _Screenshots will be added after UI stabilization. See the [live demo](#) for current UI._
- 
-| Page | Description |
-|---|---|
-| 🔐 Login / Register | Secure authentication with health onboarding |
-| 🏠 Dashboard | Quick scan shortcut + recent scan summary |
-| 👤 Health Profile | Condition checkboxes and allergy management |
-| 📷 Food Scanner | Drag-and-drop upload with OCR preview |
-| ✅ Analysis Result | Color-coded verdict, ingredient flags, warnings |
-| 🕓 Scan History | Searchable log of all past food scans |
+
  
 ---
  
@@ -304,30 +292,8 @@ Users can configure one or more of the following conditions in their health prof
  
 Analyzes extracted food label text against a user health profile.
  
-**Request Body:**
-```json
-{
-  "ocrText": "Ingredients: Sugar, Palm Oil, Wheat Flour...",
-  "nutritionFacts": "Sodium 780mg, Total Fat 12g...",
-  "healthConditions": ["diabetes", "high_blood_pressure"],
-  "allergies": ["peanuts", "gluten"]
-}
-```
- 
-**Response:**
-```json
-{
-  "verdict": "unsafe",
-  "overall_summary": "This product is not recommended for diabetic users due to high sugar content.",
-  "flagged_ingredients": [
-    { "name": "Sugar", "reason": "High glycemic index; raises blood glucose rapidly." },
-    { "name": "Palm Oil", "reason": "High in saturated fat; concern for cardiovascular health." }
-  ],
-  "nutritional_concerns": ["780mg sodium exceeds 30% of daily limit for hypertension patients."],
-  "health_risk_warnings": ["Not suitable for diabetics.", "May elevate blood pressure."],
-  "healthier_alternatives": ["Look for products with <5g sugar per serving and <200mg sodium."]
-}
-```
+
+
  
 ---
  
@@ -336,10 +302,10 @@ Analyzes extracted food label text against a user health profile.
 Contributions are welcome and appreciated. To contribute:
  
 1. Fork this repository
-2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Commit your changes: `git commit -m "feat: add your feature"`
-4. Push to the branch: `git push origin feature/your-feature-name`
-5. Open a Pull Request against `main`
+2. Create a feature branch
+3. Commit your change
+4. Push to the branch
+5. Open a Pull Request against 
 Please follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages and ensure your code passes `npm run lint` before submitting.
  
 ---

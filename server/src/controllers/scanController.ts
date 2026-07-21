@@ -1,7 +1,26 @@
 import { Request, Response, NextFunction } from 'express';
 import Tesseract from 'tesseract.js';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { z } from 'zod';
 import Scan from '../models/Scan';
+
+const analysisResponseSchema = z.object({
+  productName: z.string().default('Scanned Product'),
+  safetyScore: z.number().min(0).max(100),
+  riskLevel: z.enum(['Safe', 'Caution', 'Unsafe']),
+  harmfulIngredients: z.array(z.string()).default([]),
+  nutritionalWarnings: z.array(z.string()).default([]),
+  personalizedExplanation: z.string(),
+  nutritionFacts: z.object({
+    calories: z.number().nullable().optional(),
+    fat: z.string().nullable().optional(),
+    saturatedFat: z.string().nullable().optional(),
+    sodium: z.string().nullable().optional(),
+    carbohydrates: z.string().nullable().optional(),
+    sugar: z.string().nullable().optional(),
+    protein: z.string().nullable().optional()
+  }).optional().default({})
+});
 
 // Local Mock Fallback Analyzer in case Gemini API is not configured or fails
 const runLocalAnalysis = (ingredientsText: string, healthProfile: any) => {
@@ -147,13 +166,15 @@ export const analyzeScan = async (req: Request, res: Response, next: NextFunctio
         const ocrResult = await Tesseract.recognize(req.file.buffer, 'eng');
         ingredientsText = ocrResult.data.text;
       } catch (ocrErr) {
-        console.error('OCR Error, using fallback:', ocrErr);
-        // If OCR fails, set a placeholder so it doesn't crash
-        ingredientsText = ingredientsText || 'Ingredients: Wheat flour, sugar, salt, palm oil, dextrose, milk derivatives.';
+        console.error('OCR Error:', ocrErr);
+        return res.status(400).json({ message: 'Failed to extract text from the image. Please ensure the image is clear.' });
       }
     }
 
-    if (!ingredientsText || ingredientsText.trim().length === 0) {
+    // Sanitize basic input
+    ingredientsText = ingredientsText.trim().replace(/[<>]/g, '');
+
+    if (!ingredientsText || ingredientsText.length === 0) {
       return res.status(400).json({ message: 'No ingredients text found or extracted.' });
     }
 
@@ -197,7 +218,14 @@ export const analyzeScan = async (req: Request, res: Response, next: NextFunctio
 
         const responseResult = await model.generateContent(prompt);
         const textResponse = responseResult.response.text();
-        analysisResult = JSON.parse(textResponse);
+        const rawJson = JSON.parse(textResponse);
+        
+        const parsed = analysisResponseSchema.safeParse(rawJson);
+        if (!parsed.success) {
+          console.error('Gemini API response validation failed:', parsed.error);
+          throw new Error('Invalid response structure from AI');
+        }
+        analysisResult = parsed.data;
       } catch (aiErr) {
         console.error('Gemini API Error, falling back to local analysis:', aiErr);
         analysisResult = runLocalAnalysis(ingredientsText, healthProfile);

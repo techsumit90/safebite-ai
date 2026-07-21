@@ -41,31 +41,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Set Auth token in headers
-  const setAuthHeader = (token: string | null) => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    } else {
-      delete axios.defaults.headers.common['Authorization'];
-    }
-  };
-
   useEffect(() => {
+    // Set axios defaults for cookies
+    axios.defaults.withCredentials = true;
+
     const initAuth = async () => {
-      const token = typeof window !== 'undefined' ? localStorage.getItem('sb_token') : null;
-      if (token) {
-        setAuthHeader(token);
-        try {
-          const res = await axios.get('/api/auth/me');
-          setUser(res.data);
-        } catch (err) {
-          console.error('Invalid token or session expired', err);
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem('sb_token');
-          }
-          setAuthHeader(null);
-          setUser(null);
-        }
+      try {
+        const res = await axios.get('/api/auth/me');
+        setUser(res.data);
+      } catch (err) {
+        console.error('Unauthenticated or session expired', err);
+        setUser(null);
       }
       setLoading(false);
     };
@@ -73,32 +59,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
+    axios.defaults.withCredentials = true;
     const res = await axios.post('/api/auth/login', { email, password });
-    const { token, user: userData } = res.data;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('sb_token', token);
-    }
-    setAuthHeader(token);
+    const { user: userData } = res.data;
     setUser(userData);
     router.push('/dashboard');
   };
 
   const register = async (email: string, password: string, name: string) => {
+    axios.defaults.withCredentials = true;
     const res = await axios.post('/api/auth/register', { email, password, name });
-    const { token, user: userData } = res.data;
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('sb_token', token);
-    }
-    setAuthHeader(token);
+    const { user: userData } = res.data;
     setUser(userData);
     router.push('/dashboard');
   };
 
-  const logout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('sb_token');
+  const logout = async () => {
+    try {
+      await axios.post('/api/auth/logout');
+    } catch (error) {
+      console.error('Logout error', error);
     }
-    setAuthHeader(null);
     setUser(null);
     router.push('/login');
   };

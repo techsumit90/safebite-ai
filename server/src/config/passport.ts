@@ -1,14 +1,27 @@
 import passport from 'passport';
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import { Strategy as JwtStrategy } from 'passport-jwt';
 import User from '../models/User';
 import dotenv from 'dotenv';
+import { Request } from 'express';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  console.error('❌ FATAL: JWT_SECRET is missing from environment variables');
+  process.exit(1);
+}
+
+const cookieExtractor = (req: Request) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies['token'];
+  }
+  return token;
+};
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: cookieExtractor,
   secretOrKey: JWT_SECRET,
 };
 
