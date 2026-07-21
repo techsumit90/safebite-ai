@@ -14,7 +14,7 @@ const upload = multer({
 // Protect all routes with JWT Strategy
 const auth = passport.authenticate('jwt', { session: false });
 
-router.post('/analyze', auth, upload.single('image'), analyzeScan);
+router.post('/', auth, upload.single('image'), analyzeScan);
 router.get('/', auth, getScanHistory);
 router.delete('/:id', auth, deleteScan);
 

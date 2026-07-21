@@ -192,7 +192,7 @@ export default function DashboardPage() {
     }
 
     try {
-      const res = await axios.post('/api/scans/analyze', formData, {
+      const res = await axios.post('/api/scans', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setAnalysisResult(res.data.scan);

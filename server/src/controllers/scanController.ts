@@ -182,9 +182,12 @@ export const analyzeScan = async (req: Request, res: Response, next: NextFunctio
     let analysisResult;
 
     // Check for Gemini API key
-    if (process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here') {
+    const gKey = process.env.GEMINI_API_KEY;
+    const isPlaceholder = !gKey || gKey.trim() === '' || gKey.startsWith('your_');
+
+    if (!isPlaceholder) {
       try {
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const genAI = new GoogleGenerativeAI(gKey as string);
         // Use gemini-1.5-flash or gemini-2.5-flash
         const model = genAI.getGenerativeModel({
           model: 'gemini-1.5-flash',

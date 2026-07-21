@@ -1,10 +1,7 @@
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import User from '../models/User';
-import dotenv from 'dotenv';
 import { Request } from 'express';
-
-dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {

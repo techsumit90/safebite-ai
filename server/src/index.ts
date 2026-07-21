@@ -1,8 +1,24 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+// Validate required environment variables
+const requiredEnv = ['PORT', 'MONGO_URI', 'JWT_SECRET', 'CLIENT_URL', 'GEMINI_API_KEY'];
+const missingEnv = requiredEnv.filter((v) => !process.env[v]);
+if (missingEnv.length > 0) {
+  console.error(`❌ FATAL: Missing required environment variables: ${missingEnv.join(', ')}`);
+  process.exit(1);
+}
+
+// Check for placeholder keys
+const geminiKey = process.env.GEMINI_API_KEY;
+if (geminiKey === 'your_gemini_api_key' || geminiKey === 'your_gemini_api_key_here') {
+  console.warn('⚠️ WARNING: GEMINI_API_KEY is configured with a placeholder value. AI analysis will fall back to local analysis.');
+}
+
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import winston from 'winston';
 import expressWinston from 'express-winston';
@@ -12,28 +28,6 @@ import healthRouter from './routes/health';
 import scansRouter from './routes/scans';
 import rootRouter from './routes/root';
 import dbConnect from './config/db';
-
-dotenv.config();
-
-if (!process.env.JWT_SECRET) {
-  console.error('❌ FATAL: JWT_SECRET is missing from environment variables');
-  process.exit(1);
-}
-
-if (!process.env.CLIENT_URL) {
-  console.error('❌ FATAL: CLIENT_URL is missing from environment variables');
-  process.exit(1);
-}
-
-if (!process.env.MONGO_URI) {
-  console.error('❌ FATAL: MONGO_URI is missing from environment variables');
-  process.exit(1);
-}
-
-if (!process.env.GEMINI_API_KEY) {
-  console.error('❌ FATAL: GEMINI_API_KEY is missing from environment variables');
-  process.exit(1);
-}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
